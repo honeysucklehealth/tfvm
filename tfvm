@@ -1,0 +1,73 @@
+#!/bin/bash
+
+set -e
+
+installDir=$HOME/.terraforms
+
+tfvm_version() {
+    terraform --version
+}
+
+tfvm_list() {
+    pushd $installDir > /dev/null
+    ls . | sed 's/terraform-//g'
+    popd > /dev/null
+}
+
+tfvm_install() {
+    version=$1
+    echo "Installing Terraform $version"
+    if [ -f "$installDir/terraform-$version" ]; then
+        echo "Terraform version $version already installed."
+    else
+        pushd /tmp > /dev/null
+        curl -LO https://releases.hashicorp.com/terraform/${version}/terraform_$1_linux_amd64.zip
+        unzip ./terraform_${version}_linux_amd64.zip -d ./terraform-${version}
+        mv ./terraform-${version}/terraform $HOME/.terraforms/terraform-${version}
+        chmod +x $HOME/.terraforms/terraform-${version}
+        rm -rf ./terraform_$1_linux_amd64.zip
+        rm -rf ./terraform-${version}
+        popd
+        echo "Done"
+    fi
+}
+
+tfvm_set() {
+    version=$1
+    rm $HOME/bin/terraform
+    ln -s $HOME/.terraforms/terraform-${version} $HOME/bin/terraform
+    terraform --version
+}
+
+
+tfvm_help() {
+    echo "Simple Linux terraform version manager."
+    echo " "
+    echo "Usage:"
+    echo "    tfvm version                print current running version"
+    echo "    tfvm setup                  setup tfvm"
+    echo "    tfvm list                   list installed versions of terraform"
+    echo "    tfvm install {{version}}    install terraform version"
+    echo "    tfvm set {{version}}        set terraform version"
+}
+
+case "$1" in
+    version)
+        tfvm_version
+        ;;
+    setup)
+        tfvm_setup
+        ;;
+    list)
+        tfvm_list
+        ;;
+    install)
+        tfvm_install "$2"
+        ;;
+    set)
+        tfvm_set "$2"
+        ;;
+    *)
+        tfvm_help
+        ;;
+esac

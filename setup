@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+echo "Installing tfvm..."
+
+if [ ! -d $HOME/.terraforms ]; then
+    mkdir $HOME/.terraforms
+fi
+
+curl -LO https://raw.githubusercontent.com/aldiamond/tfvm/main/tfvm
+
+if [ ! -d $HOME/bin ]; then
+    mkdir $HOME/bin
+fi
+
+mv $HOME/tfvm $HOME/bin
+chmod +x ./bin/tfvm
+
+echo "Done. Make sure $HOME/bin is on your path."
