@@ -3,6 +3,7 @@
 set -e
 
 echo "Installing tfvm..."
+pushd /tmp > /dev/null
 
 if [ ! -d $HOME/.terraforms ]; then
     mkdir $HOME/.terraforms
@@ -14,7 +15,8 @@ if [ ! -d $HOME/bin ]; then
     mkdir $HOME/bin
 fi
 
-mv $HOME/tfvm $HOME/bin
-chmod +x ./bin/tfvm
+mv ./tfvm $HOME/bin
+chmod +x $HOME/bin/tfvm
+popd > /dev/null
 
 echo "Done. Make sure $HOME/bin is on your path."
