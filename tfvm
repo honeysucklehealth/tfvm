@@ -30,11 +30,17 @@ tfvm_install() {
         popd
         echo "Done"
     fi
+    echo "Run the following command to set the version to $version"
+    echo " "
+    echo "tfvm set $version"
+    echo " "
 }
 
 tfvm_set() {
     version=$1
-    rm $HOME/bin/terraform
+    if [ -f "$HOME/bin/terraform" ]; then
+        rm $HOME/bin/terraform
+    fi
     ln -s $HOME/.terraforms/terraform-${version} $HOME/bin/terraform
     terraform --version
 }
