@@ -11,3 +11,17 @@ Run this in the terminal:
 curl https://raw.githubusercontent.com/aldiamond/tfvm/main/setup | sh
 ```
 
+### Usage
+
+```
+>tfvm --help
+
+Simple Linux terraform version manager.
+ 
+Usage:
+    tfvm version                print current running version
+    tfvm setup                  setup tfvm
+    tfvm list                   list installed versions of terraform
+    tfvm install {{version}}    install terraform version
+    tfvm set {{version}}        set terraform version
+```
