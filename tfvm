@@ -16,9 +16,12 @@ tfvm_list() {
 
 tfvm_install() {
     version=$1
-    OS=$(uname -a | awk '{print $1}')
+    OS=$(uname -a | awk '{print tolower($1)}')
     ARCH=$(uname -m)
-    echo "Installing Terraform $version"
+    if [ $ARCH == 'x86_64' ]; then
+        ARCH='amd64'
+    fi
+    echo "Installing Terraform terraform_${version}_${OS}_${ARCH}"
     if [ -f "$installDir/terraform-$version" ]; then
         echo "Terraform version $version already installed."
     else
