@@ -23,11 +23,12 @@ tfvm_install() {
         echo "Terraform version $version already installed."
     else
         pushd /tmp > /dev/null
-        curl -LO https://releases.hashicorp.com/terraform/${version}/terraform_${version}_${OS}_${ARCH}.zip
-        unzip ./terraform_${version}_${OS}_${ARCH}.zip -d ./terraform-${version}
+        terraform="terraform_${version}_${OS}_${ARCH}"
+        curl -LO https://releases.hashicorp.com/terraform/${version}/${terraform}.zip
+        unzip ./${terraform}.zip -d ./terraform-${version}
         mv ./terraform-${version}/terraform $HOME/.terraforms/terraform-${version}
         chmod +x $HOME/.terraforms/terraform-${version}
-        rm -rf ./terraform_$1_linux_amd64.zip
+        rm -rf ./${terraform}.zip
         rm -rf ./terraform-${version}
         popd
         echo "Done"
