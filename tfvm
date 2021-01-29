@@ -21,7 +21,7 @@ tfvm_install() {
     if [ $ARCH == 'x86_64' ]; then
         ARCH='amd64'
     fi
-    echo "Installing Terraform terraform_${version}_${OS}_${ARCH}"
+    echo "Installing Terraform: ${version}_${OS}_${ARCH}"
     if [ -f "$installDir/terraform-$version" ]; then
         echo "Terraform version $version already installed."
     else
