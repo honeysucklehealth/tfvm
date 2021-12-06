@@ -17,7 +17,7 @@ if [ -f $HOME/bin/tfvm ]; then
 fi
 
 pushd $HOME/bin > /dev/null
-curl -O https://raw.githubusercontent.com/aldiamond/tfvm/main/tfvm
+curl -O https://raw.githubusercontent.com/honeysucklehealth/tfvm/main/tfvm
 chmod +x ./tfvm
 popd > /dev/null
 

@@ -8,7 +8,7 @@ All bash. Does not required elivated privileges. Just make sure `$HOME/bin` is o
 Run this in the terminal:
 
 ```
-curl https://raw.githubusercontent.com/aldiamond/tfvm/main/setup | bash
+curl https://raw.githubusercontent.com/honeysucklehealth/tfvm/main/setup | bash
 ```
 
 ### Usage
